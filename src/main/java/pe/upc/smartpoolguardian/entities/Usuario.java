@@ -1,6 +1,7 @@
 package pe.upc.smartpoolguardian.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,14 +16,18 @@ import lombok.Setter;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usuario_id;
+    private Integer usuario_id;
 
+    @NotBlank
     @Column(name = "nombre_usuario", length = 50, nullable = false)
     private String nombre_usuario;
-    @Column(name = "contraseña", length = 50, nullable = false)
-    private String contraseña;
+    @NotBlank
+    @Column(name = "password", length = 50, nullable = false)
+    private String password;
+    @NotBlank
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+    @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numero_celular;
 
