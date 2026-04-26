@@ -18,7 +18,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping
+    @PostMapping("/insertar-usuarios")
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {
         //De DTORequest a Entity
         Usuario usuario = new Usuario();
@@ -38,13 +38,13 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/listar-usuarios")
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios() {
         List<Usuario> listaUsuarios = usuarioService.mostrarUsuarios();
         return ResponseEntity.ok(listaUsuarios);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/actualizar-usuario/{id}")
     public ResponseEntity<UsuarioResponseDTO> actualizarUsuario (@PathVariable int id, @RequestBody @Valid UsuarioRequestDTO dto){
         Usuario usuario = new Usuario();
         usuario.setUsuario_id(id);

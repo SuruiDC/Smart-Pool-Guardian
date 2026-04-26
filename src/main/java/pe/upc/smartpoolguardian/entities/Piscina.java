@@ -15,12 +15,14 @@ import lombok.Setter;
 public class Piscina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer piscina_id;
+    private int piscina_id;
 
     @Column(name = "nombre_piscina",length = 50,nullable = false)
     private String nombre_piscina;
     @Column(name = "volumen",nullable = false)
     private double volumen;
+    @Column(name = "eliminado", nullable = false)
+    private boolean eliminado;
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario_id;

@@ -16,7 +16,7 @@ import lombok.Setter;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer usuario_id;
+    private int usuario_id;
 
     @NotBlank
     @Column(name = "nombre_usuario", length = 50, nullable = false)
@@ -27,6 +27,8 @@ public class Usuario {
     @NotBlank
     @Column(name = "email", length = 50, nullable = false)
     private String email;
+    @Column(name = "eliminado", nullable = false)
+    private boolean eliminado;
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numero_celular;
