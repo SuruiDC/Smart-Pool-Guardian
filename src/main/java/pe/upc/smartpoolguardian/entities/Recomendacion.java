@@ -16,7 +16,7 @@ public class Recomendacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int recomendacion_id;
+    private Integer recomendacion_id;
 
     @Column(name = "descripcion", nullable = false)
     private String mensaje;

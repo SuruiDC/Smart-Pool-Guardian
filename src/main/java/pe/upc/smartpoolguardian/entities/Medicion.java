@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Medicion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int medicion_id;
+    private Integer medicion_id;
 
     @Column(name = "fecha_medicion", nullable = false)
     private LocalDate fecha_medicion;

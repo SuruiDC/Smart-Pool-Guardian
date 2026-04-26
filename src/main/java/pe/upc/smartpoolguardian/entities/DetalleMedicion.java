@@ -16,7 +16,7 @@ public class DetalleMedicion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int detalle_medicion_id;
+    private Integer detalle_medicion_id;
 
     @Column(name = "nivel_cloro",nullable = false)
     private double nivel_cloro;

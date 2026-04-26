@@ -18,7 +18,7 @@ public class Evaluacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int evaluacion_id;
+    private Integer evaluacion_id;
 
     @Column(name = "estado_general", nullable = false)
     private String estado_general;

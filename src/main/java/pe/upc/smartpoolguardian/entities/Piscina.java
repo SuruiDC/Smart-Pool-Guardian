@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Piscina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int piscina_id;
+    private Integer piscina_id;
 
     @Column(name = "nombre_piscina",length = 50,nullable = false)
     private String nombre_piscina;
