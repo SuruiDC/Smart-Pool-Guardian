@@ -30,6 +30,13 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!-- DEPENDENCIA PARA MODEL MAPPER -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.2.6</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- DEPENDENCIA PARA @VALID -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
