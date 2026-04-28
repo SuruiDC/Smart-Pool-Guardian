@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.upc.smartpoolguardian.dtos.RolRequestDTO;
+import pe.upc.smartpoolguardian.schema.request.RolRequestDTO;
 import pe.upc.smartpoolguardian.entities.Rol;
 import pe.upc.smartpoolguardian.servicesimplements.RolService;
 

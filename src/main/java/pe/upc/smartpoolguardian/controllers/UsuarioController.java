@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.upc.smartpoolguardian.dtos.UsuarioRequestDTO;
-import pe.upc.smartpoolguardian.dtos.UsuarioResponseDTO;
+import pe.upc.smartpoolguardian.schema.request.UsuarioRequestDTO;
+import pe.upc.smartpoolguardian.schema.response.UsuarioResponseDTO;
 import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.servicesimplements.UsuarioService;
 

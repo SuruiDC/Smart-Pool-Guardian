@@ -1,7 +1,7 @@
 package pe.upc.smartpoolguardian.servicesinterfaces;
 
 import org.springframework.data.repository.query.Param;
-import pe.upc.smartpoolguardian.dtos.PiscinasPorUsuarioDTO;
+import pe.upc.smartpoolguardian.schema.dtos.PiscinasPorUsuarioDTO;
 import pe.upc.smartpoolguardian.entities.Piscina;
 
 import java.util.List;

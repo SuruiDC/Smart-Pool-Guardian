@@ -1,4 +1,4 @@
-package pe.upc.smartpoolguardian.dtos;
+package pe.upc.smartpoolguardian.schema.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

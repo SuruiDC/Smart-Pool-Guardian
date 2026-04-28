@@ -1,4 +1,4 @@
-package pe.upc.smartpoolguardian.dtos;
+package pe.upc.smartpoolguardian.schema.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

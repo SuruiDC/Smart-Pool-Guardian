@@ -1,4 +1,4 @@
-package pe.upc.smartpoolguardian.dtos;
+package pe.upc.smartpoolguardian.schema.response;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,10 +11,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PiscinaRequestDTO {
-    @NotBlank
+public class PiscinaResponseDTO {
     @NotNull
+    private int piscinaId;
+    @NotNull
+    @NotBlank
     private String nombrePiscina;
     @NotNull
     private double volumen;
+    @NotNull
+    private int usuarioId;
 }

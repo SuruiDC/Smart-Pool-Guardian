@@ -2,7 +2,7 @@ package pe.upc.smartpoolguardian.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.upc.smartpoolguardian.dtos.PiscinasPorUsuarioDTO;
+import pe.upc.smartpoolguardian.schema.dtos.PiscinasPorUsuarioDTO;
 import pe.upc.smartpoolguardian.entities.Piscina;
 import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.repositories.PiscinaRepository;
