@@ -18,7 +18,7 @@ public class Recomendacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer recomendacionId;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion", length = 255 ,nullable = false)
     private String mensaje;
 
     @ManyToOne

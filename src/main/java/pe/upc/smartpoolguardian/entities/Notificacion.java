@@ -23,7 +23,7 @@ public class Notificacion {
     @Column(name = "tipo_notificacion", nullable = false)
     private String tipoNotificacion;
 
-    @Column(name = "mensaje", nullable = false)
+    @Column(name = "mensaje", length = 255 ,nullable = false)
     private String mensaje;
 
     @Column(name = "leido", nullable = false)

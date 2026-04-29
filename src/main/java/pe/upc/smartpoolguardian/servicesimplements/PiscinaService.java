@@ -10,6 +10,7 @@ import pe.upc.smartpoolguardian.repositories.UsuarioRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PiscinaService implements IPiscinaService {
@@ -29,6 +30,11 @@ public class PiscinaService implements IPiscinaService {
                 orElseThrow(()->new RuntimeException("Usuario no encontrado"));
 
         return piscinaRepository.mostrarPiscinasPorUsuario(id);
+    }
+
+    @Override
+    public Optional<Piscina> buscarPiscinaPorId(int id) {
+        return piscinaRepository.findById(id);
     }
 
     @Override

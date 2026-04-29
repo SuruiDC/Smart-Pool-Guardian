@@ -16,11 +16,7 @@ import lombok.Setter;
 public class Piscina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     private Integer piscinaId;
-=======
-    private int piscina_id;
->>>>>>> efc206b (Se crearon los endpoints de piscinas : buscar Piscinas por id, eliminar de piscinas, actualizar piscinas,listar piscinas por idusuario,registrar piscinas)
 
     @NotBlank
     @Column(name = "nombre_piscina",length = 50,nullable = false)
@@ -28,12 +24,8 @@ public class Piscina {
     @Column(name = "volumen",nullable = false)
     private double volumen;
     @Column(name = "eliminado", nullable = false)
-<<<<<<< HEAD
     private boolean eliminado = false;
 
-=======
-    private boolean eliminado;
->>>>>>> efc206b (Se crearon los endpoints de piscinas : buscar Piscinas por id, eliminar de piscinas, actualizar piscinas,listar piscinas por idusuario,registrar piscinas)
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

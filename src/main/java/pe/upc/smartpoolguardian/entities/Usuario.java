@@ -18,11 +18,7 @@ import java.util.List;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
     private Integer usuarioId;
-=======
-    private int usuario_id;
->>>>>>> efc206b (Se crearon los endpoints de piscinas : buscar Piscinas por id, eliminar de piscinas, actualizar piscinas,listar piscinas por idusuario,registrar piscinas)
 
     @NotBlank
     @Column(name = "nombre_usuario", length = 50, nullable = false)
@@ -33,8 +29,6 @@ public class Usuario {
     @NotBlank
     @Column(name = "email", length = 50, nullable = false)
     private String email;
-    @Column(name = "eliminado", nullable = false)
-    private boolean eliminado;
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numeroCelular;

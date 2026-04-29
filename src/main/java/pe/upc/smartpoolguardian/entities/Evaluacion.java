@@ -26,7 +26,7 @@ public class Evaluacion {
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDate fechaCreacion;
 
-    @Column(name = "diagnostico", nullable = false)
+    @Column(name = "diagnostico", length = 255 ,nullable = false)
     private String diagnostico;
 
     @OneToOne
