@@ -45,7 +45,7 @@ public class MedicionController {
 
         if (mediciones.isEmpty()) {
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron medciones de esa piscina o no existe esa piscina.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron mediciones de esa piscina o no existe esa piscina.");
 
         } else {
 

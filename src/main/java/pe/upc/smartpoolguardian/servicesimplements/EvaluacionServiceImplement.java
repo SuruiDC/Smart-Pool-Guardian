@@ -6,7 +6,9 @@ import pe.upc.smartpoolguardian.entities.Evaluacion;
 import pe.upc.smartpoolguardian.repositories.IEvaluacionRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IEvaluacionService;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EvaluacionServiceImplement implements IEvaluacionService {
@@ -19,7 +21,7 @@ public class EvaluacionServiceImplement implements IEvaluacionService {
     }
 
     @Override
-    public List<Evaluacion> filtrarEvaluacion(String estadoG, String diagnostico) {
-        return eR.filtrarEvaluacion(estadoG,diagnostico);
+    public Optional<Evaluacion> filtrarEvaluacion(String estadoG, String diagnostico, LocalDate fecha) {
+        return eR.filtrarEvaluacion(estadoG,diagnostico,fecha);
     }
 }

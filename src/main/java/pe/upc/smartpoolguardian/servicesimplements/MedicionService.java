@@ -25,5 +25,8 @@ public class MedicionService implements IMedicionService {
         return mR.listarMedicionesPorPiscina(idPiscina);
     }
 
-
+    @Override
+    public Optional<Medicion> buscarMedicioPorId(int id) {
+        return mR.findById(id);
+    }
 }
