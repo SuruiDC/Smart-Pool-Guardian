@@ -1,4 +1,4 @@
-package pe.upc.smartpoolguardian.dtos;
+package pe.upc.smartpoolguardian.schema.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UsuarioResponseDTO {
-    private String nombre_usuario;
+    private String nombreUsuario;
     private String email;
-    private String numero_celular;
+    private String numeroCelular;
 }

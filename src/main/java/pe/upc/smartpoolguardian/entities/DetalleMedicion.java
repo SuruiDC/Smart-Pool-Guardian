@@ -16,40 +16,40 @@ public class DetalleMedicion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer detalle_medicion_id;
+    private Integer detalleMedicionId;
 
     @Column(name = "nivel_cloro",nullable = false)
-    private double nivel_cloro;
+    private double nivelCloro;
 
     @Column(name = "nivel_ph",nullable = false)
-    private double nivel_ph;
+    private double nivelPh;
 
     @Column(name = "temperatura",nullable = false)
     private double temperatura;
 
     @Column(name = "nivel_turbidez", nullable = false)
-    private double nivel_turbidez;
+    private double nivelTurbidez;
 
     @Column(name = "alcalinidad", nullable = false)
     private double alcalinidad;
 
     @Column(name = "dureza_calcio", nullable = false)
-    private double dureza_calcio;
+    private double durezaCalcio;
 
     @Column(name = "tiene_algas", nullable = false)
-    private boolean tiene_algas;
+    private boolean tieneAlgas;
 
     @Column(name = "color_piscina", nullable = false)
-    private String color_piscina;
+    private String colorPiscina;
 
     @Column(name = "olor", nullable = false)
     private String olor;
 
     @Column(name = "tipo_medicion", nullable = false)
-    private String tipo_medicion;
+    private String tipoMedicion;
 
     @OneToOne
     @JoinColumn(name = "medicion_id")
-    private Medicion medicion_id;
+    private Medicion medicion;
 
 }

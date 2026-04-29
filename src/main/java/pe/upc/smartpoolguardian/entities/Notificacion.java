@@ -18,10 +18,10 @@ public class Notificacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer notificacion_id;
+    private Integer notificacionId;
 
     @Column(name = "tipo_notificacion", nullable = false)
-    private String tipo_notificacion;
+    private String tipoNotificacion;
 
     @Column(name = "mensaje", nullable = false)
     private String mensaje;
@@ -30,9 +30,9 @@ public class Notificacion {
     private boolean leido;
 
     @Column(name = "fecha_creacion", nullable = false)
-    private LocalDate fecha_creacion;
+    private LocalDate fechaCreacion;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    private Usuario usuario_id;
+    private Usuario usuario;
 }

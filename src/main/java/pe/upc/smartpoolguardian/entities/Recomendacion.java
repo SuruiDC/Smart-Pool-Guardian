@@ -16,13 +16,13 @@ public class Recomendacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer recomendacion_id;
+    private Integer recomendacionId;
 
     @Column(name = "descripcion", nullable = false)
     private String mensaje;
 
     @ManyToOne
     @JoinColumn(name = "evaluacion_id")
-    private Evaluacion evaluacion_id;
+    private Evaluacion evaluacion;
 
 }

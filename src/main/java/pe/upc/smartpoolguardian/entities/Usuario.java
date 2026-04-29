@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Usuario")
 @Getter
@@ -16,21 +18,22 @@ import lombok.Setter;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usuario_id;
+    private Integer usuarioId;
 
     @NotBlank
     @Column(name = "nombre_usuario", length = 50, nullable = false)
-    private String nombre_usuario;
+    private String nombreUsuario;
     @NotBlank
     @Column(name = "password", length = 50, nullable = false)
     private String password;
     @NotBlank
     @Column(name = "email", length = 50, nullable = false)
     private String email;
-    @Column(name = "eliminado", nullable = false)
-    private boolean eliminado;
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
-    private String numero_celular;
+    private String numeroCelular;
 
+    //RELACION BIDIRECCIONAL A PISCINA
+    @OneToMany(mappedBy = "usuario")
+    private List<Piscina> piscinas;
 }

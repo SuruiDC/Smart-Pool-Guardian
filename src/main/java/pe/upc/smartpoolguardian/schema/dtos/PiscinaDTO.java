@@ -1,11 +1,6 @@
-package pe.upc.smartpoolguardian.dtos;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+package pe.upc.smartpoolguardian.schema.dtos;
 import lombok.Getter;
 import lombok.Setter;
-import pe.upc.smartpoolguardian.entities.Usuario;
 
 @Getter
 @Setter

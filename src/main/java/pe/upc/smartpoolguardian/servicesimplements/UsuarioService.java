@@ -27,14 +27,20 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario editarUsuario(Usuario usuario) {
-        Usuario existe = usuarioRepository.findById(usuario.getUsuario_id()).
+        Usuario existe = usuarioRepository.findById(usuario.getUsuarioId()).
                 orElseThrow(()->new RuntimeException("Usuario no encontrado") );
 
-        existe.setNombre_usuario(usuario.getNombre_usuario());
+        existe.setNombreUsuario(usuario.getNombreUsuario());
         existe.setPassword(usuario.getPassword());
         existe.setEmail(usuario.getEmail());
-        existe.setNumero_celular(usuario.getNumero_celular());
+        existe.setNumeroCelular(usuario.getNumeroCelular());
         return usuarioRepository.save(existe);
+    }
+
+    @Override
+    public Usuario buscarUsuarioPorId(int id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Usuario no encontrado") );
     }
 /*
     @Override
@@ -42,7 +48,9 @@ public class UsuarioService implements IUsuarioService {
         if (!usuarioRepository.existsById(id)) {
             throw new RuntimeException("Usuario no encontrado");
         }
-        usuarioRepository.deleteById(id);
+        else {
+            usuarioRepository.deleteById(id);
+        }
 
 
     }

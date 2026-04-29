@@ -1,4 +1,4 @@
-package pe.upc.smartpoolguardian.dtos;
+package pe.upc.smartpoolguardian.schema.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -8,11 +8,11 @@ import lombok.Setter;
 @Setter
 public class UsuarioRequestDTO {
     @NotBlank
-    private String nombre_usuario;
+    private String nombreUsuario;
     @NotBlank
     private String password;
     @NotBlank
     private String email;
     @NotBlank
-    private String numero_celular;
+    private String numeroCelular;
 }

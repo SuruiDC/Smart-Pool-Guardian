@@ -17,11 +17,11 @@ import java.time.LocalDate;
 public class Medicion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer medicion_id;
+    private Integer medicionId;
 
     @Column(name = "fecha_medicion", nullable = false)
-    private LocalDate fecha_medicion;
+    private LocalDate fechaMedicion;
     @ManyToOne
     @JoinColumn(name = "piscina_id")
-    private Piscina piscina_id;
+    private Piscina piscina;
 }
