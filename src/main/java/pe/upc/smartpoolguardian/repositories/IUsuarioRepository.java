@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pe.upc.smartpoolguardian.entities.Usuario;
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 }

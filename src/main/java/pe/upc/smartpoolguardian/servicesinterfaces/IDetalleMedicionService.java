@@ -4,7 +4,7 @@ import pe.upc.smartpoolguardian.entities.DetalleMedicion;
 
 import java.util.Optional;
 
-public interface IMedicionDetalleService {
+public interface IDetalleMedicionService {
 
     public DetalleMedicion crearDetalle(DetalleMedicion detalle);
 

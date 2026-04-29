@@ -27,12 +27,25 @@ public class MedicionController {
 
     @PostMapping("/registrar/")
     public ResponseEntity<?> crearMedicion(@RequestBody @Valid MedicionDTO dto) {
+        //ENCONTRAR PISCINA
+        var piscinaOpt = pS.buscarPiscinaPorId(dto.getIdPiscina());
 
-        if (pS.buscarPiscinaPorId(dto.getIdPiscina()).isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay una piscina creada con esa id.");
+        if (piscinaOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay una piscina creada con esa id.");
+        }
+        //DE DTO A ENTITY
+        Medicion medicion = new Medicion();
+        medicion.setFechaMedicion(dto.getFechaMedicion());
+        medicion.setPiscina(piscinaOpt.get());
 
-        Medicion medicion = m.map(dto, Medicion.class);
+        //CREAR MEDICION
         Medicion registro = mS.crearMedicion(medicion);
-        MedicionDTO response = m.map(registro, MedicionDTO.class);
+
+        //DE ENTITY A DTO
+        MedicionDTO response = new MedicionDTO();
+        response.setFechaMedicion(registro.getFechaMedicion());
+        response.setIdPiscina(registro.getPiscina().getPiscinaId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

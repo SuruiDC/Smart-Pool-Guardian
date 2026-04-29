@@ -5,19 +5,19 @@ import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.schema.dtos.PiscinasPorUsuarioDTO;
 import pe.upc.smartpoolguardian.entities.Piscina;
 import pe.upc.smartpoolguardian.entities.Usuario;
-import pe.upc.smartpoolguardian.repositories.PiscinaRepository;
-import pe.upc.smartpoolguardian.repositories.UsuarioRepository;
+import pe.upc.smartpoolguardian.repositories.IPiscinaRepository;
+import pe.upc.smartpoolguardian.repositories.IUsuarioRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PiscinaService implements IPiscinaService {
+public class PiscinaServiceImplement implements IPiscinaService {
     @Autowired
-    private PiscinaRepository piscinaRepository;
+    private IPiscinaRepository piscinaRepository;
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private IUsuarioRepository usuarioRepository;
 
     @Override
     public Piscina crearPiscinaPorUsuario(Piscina piscina) {

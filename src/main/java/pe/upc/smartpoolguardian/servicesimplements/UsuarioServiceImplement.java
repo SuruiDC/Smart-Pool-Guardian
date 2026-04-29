@@ -3,15 +3,15 @@ package pe.upc.smartpoolguardian.servicesimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.entities.Usuario;
-import pe.upc.smartpoolguardian.repositories.UsuarioRepository;
+import pe.upc.smartpoolguardian.repositories.IUsuarioRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IUsuarioService;
 
 import java.util.List;
 
 @Service
-public class UsuarioService implements IUsuarioService {
+public class UsuarioServiceImplement implements IUsuarioService {
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private IUsuarioRepository usuarioRepository;
 
     @Override
     public Usuario registrarUsuario(Usuario usuario) {

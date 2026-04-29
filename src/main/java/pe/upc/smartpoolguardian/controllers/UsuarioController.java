@@ -9,8 +9,8 @@ import pe.upc.smartpoolguardian.entities.Rol;
 import pe.upc.smartpoolguardian.schema.request.UsuarioRequestDTO;
 import pe.upc.smartpoolguardian.schema.response.UsuarioResponseDTO;
 import pe.upc.smartpoolguardian.entities.Usuario;
-import pe.upc.smartpoolguardian.servicesimplements.RolService;
-import pe.upc.smartpoolguardian.servicesimplements.UsuarioService;
+import pe.upc.smartpoolguardian.servicesimplements.RolServiceImplement;
+import pe.upc.smartpoolguardian.servicesimplements.UsuarioServiceImplement;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ import java.util.List;
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImplement usuarioService;
     @Autowired
-    private RolService rolService;
+    private RolServiceImplement rolService;
 
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {

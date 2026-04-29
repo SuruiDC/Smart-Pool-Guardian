@@ -12,7 +12,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Repository
-public interface NotificacionRepository extends CrudRepository<Notificacion, Integer> {
+public interface INotificacionRepository extends CrudRepository<Notificacion, Integer> {
     @Query("SELECT " +
             " n.notificacionId AS notificacionId, " +
             " n.tipoNotificacion AS tipoNotificacion, " +
@@ -59,7 +59,7 @@ public interface NotificacionRepository extends CrudRepository<Notificacion, Int
             " n.usuario.usuarioId AS usuarioId " +
             " FROM Notificacion n " +
             " WHERE n.fechaCreacion = :fecha " +
-            " AND (:hora IS NULL or n.horaCreacion = :hora) " +
+            " AND n.horaCreacion = COALESCE(:hora, n.horaCreacion) " +
             " AND n.usuario.usuarioId = :usuarioId ")
     public List<NotificacionResponseDTO2> listarPorFechayHora(
             @Param("usuarioId") int usuarioId,

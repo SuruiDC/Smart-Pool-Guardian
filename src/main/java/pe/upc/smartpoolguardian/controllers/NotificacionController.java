@@ -10,8 +10,8 @@ import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.schema.request.NotificacionRequestDTO;
 import pe.upc.smartpoolguardian.schema.response.NotificacionResponseDTO;
 import pe.upc.smartpoolguardian.schema.response.NotificacionResponseDTO2;
-import pe.upc.smartpoolguardian.servicesimplements.NotificacionService;
-import pe.upc.smartpoolguardian.servicesimplements.UsuarioService;
+import pe.upc.smartpoolguardian.servicesimplements.NotificacionServiceImplement;
+import pe.upc.smartpoolguardian.servicesimplements.UsuarioServiceImplement;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,9 +21,9 @@ import java.util.List;
 @RequestMapping("/api/notificaciones")
 public class NotificacionController {
     @Autowired
-    private NotificacionService notificacionService;
+    private NotificacionServiceImplement notificacionService;
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImplement usuarioService;
 
     @PostMapping
     public ResponseEntity<NotificacionResponseDTO> crearNotificacion(@RequestBody NotificacionRequestDTO dto) {

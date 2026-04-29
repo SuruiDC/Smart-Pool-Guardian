@@ -3,7 +3,7 @@ package pe.upc.smartpoolguardian.servicesimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.entities.Notificacion;
-import pe.upc.smartpoolguardian.repositories.NotificacionRepository;
+import pe.upc.smartpoolguardian.repositories.INotificacionRepository;
 import pe.upc.smartpoolguardian.schema.response.NotificacionResponseDTO2;
 import pe.upc.smartpoolguardian.servicesinterfaces.INotificacionService;
 
@@ -12,9 +12,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 @Service
-public class NotificacionService implements INotificacionService {
+public class NotificacionServiceImplement implements INotificacionService {
     @Autowired
-    private NotificacionRepository notificacionRepository;
+    private INotificacionRepository notificacionRepository;
 
     @Override
     public Notificacion crearNotificacion(Notificacion notificacion) {
