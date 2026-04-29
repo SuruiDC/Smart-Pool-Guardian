@@ -9,4 +9,5 @@ public interface IRolService {
     public List<Rol> mostrarRoles();
     public Rol actualizarRol(Rol rol);
     public void eliminarRolPorId(int id);
+    public Rol findByRolId(int rolId);
 }

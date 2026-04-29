@@ -41,4 +41,10 @@ public class RolService implements IRolService {
             throw new RuntimeException("Rol no encontrado");
         }
     }
+
+    @Override
+    public Rol findByRolId(int rolId) {
+        return rolRepository.findById(rolId)
+                .orElseThrow(()-> new RuntimeException("Rol no encontrado"));
+    }
 }

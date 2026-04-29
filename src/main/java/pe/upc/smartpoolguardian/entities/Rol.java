@@ -21,10 +21,5 @@ public class Rol {
     @NotBlank
     @Column(name = "tipo_rol", length = 30, nullable = false)
     private String tipoRol;
-/*
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
 
- */
 }
