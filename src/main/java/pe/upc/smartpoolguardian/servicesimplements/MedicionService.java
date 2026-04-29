@@ -7,6 +7,7 @@ import pe.upc.smartpoolguardian.repositories.IMedicionRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicionService implements IMedicionService {
@@ -22,5 +23,10 @@ public class MedicionService implements IMedicionService {
     @Override
     public List<Medicion> listarMedicionesPorPiscina(int idPiscina) {
         return mR.listarMedicionesPorPiscina(idPiscina);
+    }
+
+    @Override
+    public Optional<Medicion> buscarMedicioPorId(int id) {
+        return mR.findById(id);
     }
 }
