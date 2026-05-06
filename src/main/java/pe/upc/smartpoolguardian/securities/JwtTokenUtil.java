@@ -14,11 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtil{
 
 
-    private static final long TOKEN_VALIDITY = 5 * 60 * 60 * 1000; // 5 horas
+    private static final long TOKEN_VALIDITY = 2 * 60 * 60 * 1000; // 2 horas
 
     @Value("${jwt.secret}")
     private String secret;

@@ -34,6 +34,9 @@ public class Usuario {
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numeroCelular;
+    @NotBlank
+    @Column(name = "eliminado", nullable = false)
+    private Boolean eliminado;
 
     @ManyToOne
     @JoinColumn(name = "rol_id")
