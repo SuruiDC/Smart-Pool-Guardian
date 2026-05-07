@@ -1,12 +1,15 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "Notificacion")
@@ -19,19 +22,23 @@ public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer notificacionId;
-
+    @NotBlank
     @Column(name = "tipo_notificacion", nullable = false)
     private String tipoNotificacion;
-
-    @Column(name = "mensaje", length = 255 ,nullable = false)
+    @NotBlank
+    @Column(name = "mensaje", nullable = false)
     private String mensaje;
 
     @Column(name = "leido", nullable = false)
-    private boolean leido;
+    private boolean leido = false;
 
     @Column(name = "fecha_creacion", nullable = false)
     private LocalDate fechaCreacion;
 
+    @Column(name = "hora_creacion", nullable = false)
+    private LocalTime horaCreacion;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

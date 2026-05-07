@@ -1,5 +1,6 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class Piscina {
     @Column(name = "eliminado", nullable = false)
     private boolean eliminado = false;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

@@ -3,15 +3,15 @@ package pe.upc.smartpoolguardian.servicesimplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.entities.Rol;
-import pe.upc.smartpoolguardian.repositories.RolRepository;
+import pe.upc.smartpoolguardian.repositories.IRolRepository;
 import pe.upc.smartpoolguardian.servicesinterfaces.IRolService;
 
 import java.util.List;
 
 @Service
-public class RolService implements IRolService {
+public class RolServiceImplement implements IRolService {
     @Autowired
-    private RolRepository rolRepository;
+    private IRolRepository rolRepository;
 
     @Override
     public Rol crearRol(Rol rol) {
@@ -40,5 +40,11 @@ public class RolService implements IRolService {
         else  {
             throw new RuntimeException("Rol no encontrado");
         }
+    }
+
+    @Override
+    public Rol findByRolId(int rolId) {
+        return rolRepository.findById(rolId)
+                .orElseThrow(()-> new RuntimeException("Rol no encontrado"));
     }
 }

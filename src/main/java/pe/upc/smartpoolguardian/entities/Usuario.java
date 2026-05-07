@@ -1,7 +1,9 @@
 package pe.upc.smartpoolguardian.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +34,22 @@ public class Usuario {
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numeroCelular;
+    @NotBlank
+    @Column(name = "eliminado", nullable = false)
+    private Boolean eliminado;
+
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
 
     //RELACION BIDIRECCIONAL A PISCINA
-    @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Piscina> piscinas;
+
+    //RELACION BIDIRECCIONAL A NOTIFICACIONES
+    @JsonManagedReference
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Notificacion> notificaciones;
+
 }

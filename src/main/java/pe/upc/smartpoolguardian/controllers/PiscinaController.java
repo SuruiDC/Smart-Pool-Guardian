@@ -11,17 +11,17 @@ import pe.upc.smartpoolguardian.schema.response.PiscinaResponseDTO;
 import pe.upc.smartpoolguardian.schema.dtos.PiscinasPorUsuarioDTO;
 import pe.upc.smartpoolguardian.entities.Piscina;
 import pe.upc.smartpoolguardian.entities.Usuario;
-import pe.upc.smartpoolguardian.servicesimplements.PiscinaService;
-import pe.upc.smartpoolguardian.servicesimplements.UsuarioService;
+import pe.upc.smartpoolguardian.servicesimplements.PiscinaServiceImplement;
+import pe.upc.smartpoolguardian.servicesimplements.UsuarioServiceImplement;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/piscinas")
 public class PiscinaController {
     @Autowired
-    private PiscinaService piscinaService;
+    private PiscinaServiceImplement piscinaService;
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServiceImplement usuarioService;
 
     @PostMapping("/registrar/{idUsuario}")
     public ResponseEntity<PiscinaResponseDTO> crearPiscina(@PathVariable int idUsuario,

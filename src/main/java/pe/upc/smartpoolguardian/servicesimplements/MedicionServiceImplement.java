@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MedicionService implements IMedicionService {
+public class MedicionServiceImplement implements IMedicionService {
 
     @Autowired
     private IMedicionRepository mR;

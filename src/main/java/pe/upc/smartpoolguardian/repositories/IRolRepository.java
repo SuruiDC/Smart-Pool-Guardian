@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import pe.upc.smartpoolguardian.entities.Rol;
 
 @Repository
-public interface RolRepository extends JpaRepository<Rol, Integer> {
+public interface IRolRepository extends JpaRepository<Rol, Integer> {
+    Rol findByRolId(int rolId);
 }

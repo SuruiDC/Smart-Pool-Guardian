@@ -10,7 +10,7 @@ import pe.upc.smartpoolguardian.entities.Piscina;
 import java.util.List;
 
 @Repository
-public interface PiscinaRepository extends JpaRepository<Piscina,Integer> {
+public interface IPiscinaRepository extends JpaRepository<Piscina,Integer> {
     @Query(" SELECT " +
             " p.piscinaId AS piscinaId, " +
             " p.nombrePiscina AS nombrePiscina, " +

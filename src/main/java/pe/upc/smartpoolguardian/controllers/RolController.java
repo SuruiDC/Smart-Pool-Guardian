@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.schema.request.RolRequestDTO;
 import pe.upc.smartpoolguardian.entities.Rol;
-import pe.upc.smartpoolguardian.servicesimplements.RolService;
+import pe.upc.smartpoolguardian.servicesimplements.RolServiceImplement;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/roles")
 public class RolController {
     @Autowired
-    private RolService rolService;
+    private RolServiceImplement rolService;
 
     @PostMapping
     public ResponseEntity<Rol> crearRol(@RequestBody @Valid RolRequestDTO dto) {
