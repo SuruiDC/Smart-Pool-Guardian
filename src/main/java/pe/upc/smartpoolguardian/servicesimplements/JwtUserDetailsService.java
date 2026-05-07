@@ -24,13 +24,15 @@ public class JwtUserDetailsService implements UserDetailsService {
         Usuario user = repo.findOneByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("User not exists", username));
+            throw new UsernameNotFoundException(String.format("El usuario no existe", username));
         }
 
+        //Creacion de la lista de roles en un usuario, en nuestro caso solo pasaremos 1 rol
         List<GrantedAuthority> roles = new ArrayList<>();
 
         roles.add(new SimpleGrantedAuthority(user.getRol().getTipoRol()));
 
+        //Se devuelve el detalle de usuario
         UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getPassword(), user.getEliminado(), true, true, true, roles);
 
         return ud;
