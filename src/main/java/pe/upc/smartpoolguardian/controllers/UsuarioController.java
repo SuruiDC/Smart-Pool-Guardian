@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Rol;
+import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 import pe.upc.smartpoolguardian.schema.request.UsuarioRequestDTO;
 import pe.upc.smartpoolguardian.schema.response.UsuarioResponseDTO;
 import pe.upc.smartpoolguardian.entities.Usuario;
@@ -75,6 +76,10 @@ public class UsuarioController {
                 actualizado.getRol().getRolId()
         );
         return ResponseEntity.ok(response);
+    }
+    @GetMapping("/reporte-inactivos")
+    public List<UsuariosInactivosDTO> getInactivos(@RequestParam(defaultValue = "15") int dias) {
+        return usuarioService.obtenerUsuariosInactivos(dias);
     }
 /*
     @DeleteMapping("/{id}")

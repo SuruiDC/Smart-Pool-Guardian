@@ -18,6 +18,5 @@ public interface IPiscinaRepository extends JpaRepository<Piscina,Integer> {
             " FROM Piscina p WHERE p.eliminado=false " +
             " AND p.usuario.usuarioId = :usuarioIngresado")
     public List<PiscinasPorUsuarioDTO> mostrarPiscinasPorUsuario(
-            @Param("usuarioIngresado")int id);
-
+            @Param("usuarioIngresado") int id);
 }

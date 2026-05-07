@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDTO;
+import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
@@ -64,5 +65,10 @@ public class MedicionController {
 
             return ResponseEntity.ok(mediciones);
         }
+    }
+
+    @GetMapping("/prediccion-algas/{idUsuario}")
+    public List<PrediccionAlgasDTO> checkAlgas(@PathVariable("idUsuario") Integer idUsuario) {
+        return mS.obtenerPrediccionesAlgas(idUsuario);
     }
 }
