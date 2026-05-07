@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.repositories.IMedicionRepository;
+import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 
 import java.util.List;
@@ -28,5 +29,10 @@ public class MedicionServiceImplement implements IMedicionService {
     @Override
     public Optional<Medicion> buscarMedicioPorId(int id) {
         return mR.findById(id);
+    }
+
+    @Override
+    public List<PrediccionAlgasDTO> obtenerPrediccionesAlgas(Integer idUsuario) {
+        return mR.predecirAlgasPorUsuario(idUsuario);
     }
 }

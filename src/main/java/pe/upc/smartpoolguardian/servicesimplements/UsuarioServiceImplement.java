@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.repositories.IUsuarioRepository;
+import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IUsuarioService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -42,6 +44,12 @@ public class UsuarioServiceImplement implements IUsuarioService {
     public Usuario buscarUsuarioPorId(int id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("Usuario no encontrado") );
+    }
+
+    @Override
+    public List<UsuariosInactivosDTO> obtenerUsuariosInactivos(int diasInactividad) {
+        LocalDateTime fechaLimite = LocalDateTime.now().minusDays(diasInactividad);
+        return usuarioRepository.listarUsuariosInactivos(fechaLimite);
     }
 /*
     @Override

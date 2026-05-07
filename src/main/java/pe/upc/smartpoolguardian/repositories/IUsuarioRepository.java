@@ -7,6 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pe.upc.smartpoolguardian.entities.Usuario;
+import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     public Usuario findOneByUsername(String username);
@@ -20,4 +25,13 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Modifying
     @Query(value = "insert into rol (rol, user_id) VALUES (:rol, :user_id)", nativeQuery = true)
     public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
+
+    //USUARIOS INACTIVOS
+    @Query("SELECT u.nombreUsuario, u.email, u.numeroCelular, p.nombrePiscina, MAX(m.fechaMedicion) " +
+            "FROM Usuario u " +
+            "JOIN u.piscinas p " +
+            "JOIN p.mediciones m " +
+            "GROUP BY u.nombreUsuario, u.email, u.numeroCelular, p.nombrePiscina " +
+            "HAVING MAX(m.fechaMedicion) < :fechaLimite")
+    public List<UsuariosInactivosDTO> listarUsuariosInactivos(@Param("fechaLimite") LocalDateTime fechaLimite);
 }
