@@ -16,6 +16,17 @@ public interface IMedicionRepository extends JpaRepository<Medicion,Integer> {
             @Param("idPiscina") Integer idPiscina
     );
 
+    @Query(value = "SELECT p.piscina_id, p.nombre_piscina, m.fecha_medicion, d.tipo_medicion FROM medicion m\n" +
+            "INNER JOIN detalle_medicion d\n" +
+            "ON d.medicion_id = m.medicion_id\n" +
+            "LEFT JOIN piscina p\n" +
+            "on p.piscina_id = m.piscina_id\n" +
+            "WHERE m.piscina_id = :idPiscina AND d.tipo_medicion = :tipo", nativeQuery = true)
+    List<Object[]> ObtenerMedicionesDeUnTipoPorPiscina(
+            @Param("idPiscina") Integer idPiscina,
+            @Param("tipo")  String tipo
+    );
+
     @Query(value = "SELECT p.nombre_piscina, dm.temperatura, dm.nivel_cloro " +
             "FROM medicion m " +
             "JOIN piscina p ON m.piscina_id = p.piscina_id " +

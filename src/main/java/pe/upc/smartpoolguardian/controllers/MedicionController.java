@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDTO;
 import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
+import pe.upc.smartpoolguardian.schema.response.MedPorTipoResponseDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -76,5 +79,29 @@ public class MedicionController {
         }
 
         return new ResponseEntity<>(alertas, HttpStatus.OK);
+    }
+
+    @GetMapping("/obtener-tipo-mediciones-por-piscina/{idPiscina}/{tipo}")
+    public ResponseEntity<?>temperaturasMasAlta(
+            @PathVariable("idPiscina") Integer idPiscina,
+            @PathVariable("tipo") String tipo
+    ) {
+        List<Object[]> lista = mS.ObtenerMedicionesDeUnTipoPorPiscina(idPiscina, tipo);
+
+        if(lista.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay mediciones existentes");
+        }
+
+        List<MedPorTipoResponseDTO> response = new ArrayList<>();
+        for(Object[] fila : lista){
+            MedPorTipoResponseDTO dto = new MedPorTipoResponseDTO();
+            dto.setPiscina_id(((Number)fila[0]).intValue());
+            dto.setNombre_piscina(((String)fila[1]));
+            dto.setFecha_meicion(((LocalDate)fila[2]));
+            dto.setTipo_medicion(((String)fila[3]));
+            response.add(dto);
+        }
+
+        return ResponseEntity.ok(response);
     }
 }

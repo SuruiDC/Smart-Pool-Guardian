@@ -55,4 +55,9 @@ public class MedicionServiceImplement implements IMedicionService {
         }
         return dtos;
     }
+
+    @Override
+    public List<Object[]> ObtenerMedicionesDeUnTipoPorPiscina(Integer idPiscina, String tipo) {
+        return mR.ObtenerMedicionesDeUnTipoPorPiscina(idPiscina, tipo);
+    }
 }
