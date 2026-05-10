@@ -33,8 +33,11 @@ public class PiscinaServiceImplement implements IPiscinaService {
     }
 
     @Override
-    public Optional<Piscina> buscarPiscinaPorId(int id) {
-        return piscinaRepository.findById(id);
+    public Piscina buscarPiscinaPorId(int id) {
+
+        return piscinaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Piscina no encontrado") );
+
     }
 
     @Override

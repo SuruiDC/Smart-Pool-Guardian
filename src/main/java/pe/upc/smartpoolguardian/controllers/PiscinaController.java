@@ -14,6 +14,7 @@ import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.servicesimplements.PiscinaServiceImplement;
 import pe.upc.smartpoolguardian.servicesimplements.UsuarioServiceImplement;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/piscinas")
@@ -24,8 +25,10 @@ public class PiscinaController {
     private UsuarioServiceImplement usuarioService;
 
     @PostMapping("/registrar/{idUsuario}")
-    public ResponseEntity<PiscinaResponseDTO> crearPiscina(@PathVariable int idUsuario,
-                                                           @RequestBody @Valid PiscinaRequestDTO dto) {
+    public ResponseEntity<PiscinaResponseDTO> crearPiscina(
+            @PathVariable int idUsuario,
+            @RequestBody @Valid PiscinaRequestDTO dto
+    ){
         //Verificar si existe usuario
         Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
 
@@ -49,17 +52,22 @@ public class PiscinaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PiscinasPorUsuarioDTO>> mostrarPiscinasporUsuario(@RequestParam int idUsuario) {
+    public ResponseEntity<List<PiscinasPorUsuarioDTO>> mostrarPiscinasporUsuario(
+            @RequestParam int idUsuario
+    ) {
         List<PiscinasPorUsuarioDTO> lista = piscinaService.mostrarPiscinasPorUsuario(idUsuario);
         return ResponseEntity.status(HttpStatus.OK).body(lista);
     }
 
     @PutMapping("/{idUsuario}/{idPiscina}")
-    public ResponseEntity<PiscinaResponseDTO> actualizarPiscina(@PathVariable int idUsuario,
-                                                                @PathVariable int idPiscina,
-                                                                @RequestBody @Valid PiscinaRequestDTO dto) {
+    public ResponseEntity<?> actualizarPiscina(
+            @PathVariable int idUsuario,
+            @PathVariable int idPiscina,
+            @RequestBody @Valid PiscinaRequestDTO dto
+    ) {
         //Verificar si existe usuario
         Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
+        if (!usuario.getActivo()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario inactivo.");
 
         //DTO a Entity
         Piscina actualizar = new Piscina();
@@ -91,18 +99,18 @@ public class PiscinaController {
     }
 
     @DeleteMapping("/{idUsuario}/{idPiscina}")
-    public ResponseEntity<Void> eliminarPiscina(@PathVariable int idUsuario,
-                                                @PathVariable int idPiscina) {
-        //Verificar si existe usuario
+    public ResponseEntity<?> eliminarPiscina(
+            @PathVariable int idUsuario,
+            @PathVariable int idPiscina
+    ) {
+
+        Piscina piscina = piscinaService.buscarPiscinaPorId(idPiscina);
         Usuario usuario = usuarioService.buscarUsuarioPorId(idUsuario);
 
-        for (Piscina p: usuario.getPiscinas()) {
-            if (p.getPiscinaId() == idPiscina) {
-                piscinaService.eliminarPiscina(p);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-            }
+        if (!usuario.getActivo()) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario inactivo.");
+        if (!piscina.getUsuario().getUsuarioId().equals(usuario.getUsuarioId())) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Esa piscina no pertenece a ese usuario.");
 
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Piscina no existe");
+        piscinaService.eliminarPiscina(piscina);
+        return ResponseEntity.status(HttpStatus.OK).body("Piscina eliminada.");
     }
 }

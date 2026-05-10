@@ -12,5 +12,11 @@ import java.util.List;
 public interface IRecomendacionRepository extends JpaRepository<Recomendacion, Integer> {
 
     @Query("SELECT r FROM Recomendacion r WHERE r.evaluacion.evaluacionId = :evaluacionId")
-    List<Recomendacion> findByEvaluacionId(@Param("evaluacionId") Integer evaluacionId);
+    public List<Recomendacion> findByEvaluacionId(@Param("evaluacionId") Integer evaluacionId);
+
+    @Query(value = "SELECT r.descripcion, e.diagnostico, e.estado_general, e.fecha_creacion FROM recomendacion AS r\n" +
+            "INNER JOIN evaluacion AS e\n" +
+            "ON r.evaluacion_id = e.evaluacion_id\n" +
+            "WHERE e.estado_general = 'CRITICO'", nativeQuery = true)
+    public List<Object[]> ListarRecomendacionParaCritico();
 }
