@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Rol;
 import pe.upc.smartpoolguardian.schema.request.UsuarioRequestDTO;
@@ -22,12 +23,16 @@ public class UsuarioController {
     @Autowired
     private RolServiceImplement rolService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @PostMapping
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {
         //De DTORequest a Entity
         Usuario usuario = new Usuario();
         usuario.setNombreUsuario(dto.getNombreUsuario());
-        usuario.setPassword(dto.getPassword());
+        usuario.setActivo(true);
+        usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         usuario.setEmail(dto.getEmail());
         usuario.setNumeroCelular(dto.getNumeroCelular());
 
@@ -42,6 +47,7 @@ public class UsuarioController {
                 nuevoUsuario.getNombreUsuario(),
                 nuevoUsuario.getEmail(),
                 nuevoUsuario.getNumeroCelular(),
+                nuevoUsuario.getActivo(),
                 nuevoUsuario.getRol().getRolId()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -59,6 +65,7 @@ public class UsuarioController {
         Usuario usuario = new Usuario();
         usuario.setUsuarioId(id);
         usuario.setNombreUsuario(dto.getNombreUsuario());
+        usuario.setActivo(true);
         usuario.setPassword(dto.getPassword());
         usuario.setEmail(dto.getEmail());
         usuario.setNumeroCelular(dto.getNumeroCelular());
@@ -72,6 +79,7 @@ public class UsuarioController {
                 actualizado.getNombreUsuario(),
                 actualizado.getEmail(),
                 actualizado.getNumeroCelular(),
+                actualizado.getActivo(),
                 actualizado.getRol().getRolId()
         );
         return ResponseEntity.ok(response);

@@ -36,7 +36,7 @@ public class Usuario {
     @NotBlank
     @Column(name = "numero_celular", length = 15, nullable = false)
     private String numeroCelular;
-    @NotBlank
+
     @Column(name = "activo", nullable = false)
     private Boolean activo;
 
