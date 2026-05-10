@@ -1,6 +1,7 @@
 package pe.upc.smartpoolguardian.servicesinterfaces;
 
 import pe.upc.smartpoolguardian.entities.Usuario;
+import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ public interface IUsuarioService {
     public Usuario editarUsuario(Usuario usuario);
     public Usuario buscarUsuarioPorId(int id);
     // public void borrarUsuarioPorId(int id);
+    public List<UsuariosInactivosDTO> obtenerInactivos(int dias);
+
 }

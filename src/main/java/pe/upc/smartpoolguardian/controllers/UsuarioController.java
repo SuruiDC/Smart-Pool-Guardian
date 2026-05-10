@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Rol;
+import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 import pe.upc.smartpoolguardian.schema.request.UsuarioRequestDTO;
 import pe.upc.smartpoolguardian.schema.response.UsuarioResponseDTO;
 import pe.upc.smartpoolguardian.entities.Usuario;
@@ -84,7 +85,12 @@ public class UsuarioController {
         );
         return ResponseEntity.ok(response);
     }
-/*
+    @GetMapping("/reporte-usuarios-inactivos")
+    public List<UsuariosInactivosDTO> mostrarInactivos(@RequestParam(defaultValue = "15") int dias) {
+
+        return usuarioService.obtenerInactivos(dias);
+    }
+    /*
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuarioPorId (@PathVariable int id){
         usuarioService.borrarUsuarioPorId(id);
