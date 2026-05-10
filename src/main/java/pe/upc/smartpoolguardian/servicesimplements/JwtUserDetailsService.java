@@ -30,7 +30,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         //Creacion de la lista de roles en un usuario, en nuestro caso solo pasaremos 1 rol
         List<GrantedAuthority> roles = new ArrayList<>();
 
-        roles.add(new SimpleGrantedAuthority(user.getRol().getTipoRol()));
+        roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRol().getTipoRol()));
 
         //Se devuelve el detalle de usuario
         UserDetails ud = new org.springframework.security.core.userdetails.User(user.getNombreUsuario(), user.getPassword(), user.getActivo(), true, true, true, roles);

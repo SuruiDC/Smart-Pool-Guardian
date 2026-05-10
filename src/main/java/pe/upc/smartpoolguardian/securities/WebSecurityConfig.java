@@ -92,7 +92,7 @@ public class WebSecurityConfig {
 
                         //Permisos DEV
                         .requestMatchers(
-                                "/api/roles/**",
+                                "/api/roles",
                                 "/api/usuarios/eliminar"
                         ).hasAnyRole("DEV")
 
