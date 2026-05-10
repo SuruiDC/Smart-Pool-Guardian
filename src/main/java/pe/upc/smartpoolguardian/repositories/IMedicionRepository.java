@@ -21,7 +21,7 @@ public interface IMedicionRepository extends JpaRepository<Medicion,Integer> {
             "ON d.medicion_id = m.medicion_id\n" +
             "LEFT JOIN piscina p\n" +
             "on p.piscina_id = m.piscina_id\n" +
-            "WHERE m.piscina_id = :idPiscina AND d.tipo_medicion = :tipo", nativeQuery = true)
+            "WHERE m.piscina_id = :idPiscina AND d.tipo_medicion = :tipo AND p.eliminado = false", nativeQuery = true)
     List<Object[]> ObtenerMedicionesDeUnTipoPorPiscina(
             @Param("idPiscina") Integer idPiscina,
             @Param("tipo")  String tipo
@@ -34,7 +34,8 @@ public interface IMedicionRepository extends JpaRepository<Medicion,Integer> {
             "WHERE dm.temperatura > 28.0 " +
             "AND dm.nivel_cloro < 1.0 " +
             "AND p.usuario_id = :idUsuario " +
-            "AND m.fecha_medicion >= (CURRENT_TIMESTAMP - INTERVAL '1 month')", // Aumentamos a 1 mes para la prueba
+            "AND m.fecha_medicion >= (CURRENT_TIMESTAMP - INTERVAL '1 month')"+// Aumentamos a 1 mes para la prueba
+            "AND p.eliminado = false",
             nativeQuery = true)
     List<Object[]> predecirAlgas(@Param("idUsuario") Integer idUsuario);
 

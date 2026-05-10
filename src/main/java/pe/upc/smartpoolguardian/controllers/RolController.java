@@ -41,10 +41,5 @@ public class RolController {
         return ResponseEntity.ok(creado);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Rol> eliminarRol(@PathVariable int id) {
-        rolService.eliminarRolPorId(id);
-        return ResponseEntity.noContent().build();
-    }
 
 }

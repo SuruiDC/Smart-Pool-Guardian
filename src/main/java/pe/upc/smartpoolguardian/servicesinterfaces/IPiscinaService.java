@@ -9,7 +9,7 @@ public interface IPiscinaService {
 
     public List<PiscinasPorUsuarioDTO> mostrarPiscinasPorUsuario(int id);
 
-    public Optional<Piscina> buscarPiscinaPorId(int id);
+    public Piscina buscarPiscinaPorId(int id);
 
     public Piscina actualizarPiscina(Piscina piscina);
 

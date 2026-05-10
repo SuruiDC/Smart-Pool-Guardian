@@ -58,7 +58,11 @@ public class NotificacionController {
         return ResponseEntity.ok(notificacionService.listarPorUsuarioId(usuarioId));
     }
     @PutMapping("/actualizar-leido/{idUsuario}/{idNotificacion}")
-    public ResponseEntity<String>actualizarLeido(@PathVariable int idUsuario, @PathVariable int idNotificacion) {
+    public ResponseEntity<String>actualizarLeido(
+            @PathVariable int idUsuario,
+            @PathVariable int idNotificacion
+    ) {
+
         Usuario user = usuarioService.buscarUsuarioPorId(idUsuario);
 
         boolean encontrada = false;
@@ -81,19 +85,29 @@ public class NotificacionController {
     }
 
     @GetMapping("/leidos/")
-    public ResponseEntity<List<NotificacionResponseDTO2>> listarLeidosPorUsuario(@RequestParam int usuarioId){
+    public ResponseEntity<List<NotificacionResponseDTO2>> listarLeidosPorUsuario(
+            @RequestParam int usuarioId
+    ){
+
         return ResponseEntity.ok(notificacionService.listarLeidosPorUsuario(usuarioId));
+
     }
 
     @GetMapping("/no-leidos/")
-    public ResponseEntity<List<NotificacionResponseDTO2>> listarNoLeidosPorUsuario(@RequestParam int usuarioId){
+    public ResponseEntity<List<NotificacionResponseDTO2>> listarNoLeidosPorUsuario(
+            @RequestParam int usuarioId
+    ){
+
         return ResponseEntity.ok(notificacionService.listarNoLeidosPorUsuario(usuarioId));
+
     }
 
     @GetMapping("/buscar-por-fecha-y-hora/")
-    public ResponseEntity<List<NotificacionResponseDTO2>> listarPorFechayHora(@RequestParam int usuarioId,
-                                                                              @RequestParam LocalDate fecha,
-                                                                              @RequestParam LocalTime hora){
+    public ResponseEntity<List<NotificacionResponseDTO2>> listarPorFechayHora(
+            @RequestParam int usuarioId,
+            @RequestParam LocalDate fecha,
+            @RequestParam LocalTime hora
+    ){
         return ResponseEntity.ok(notificacionService.listarPorFechayHora(usuarioId, fecha, hora));
     }
 }
