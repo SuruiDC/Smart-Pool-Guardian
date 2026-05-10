@@ -86,8 +86,8 @@ public class WebSecurityConfig {
                         //Permisos ADMIN
                         .requestMatchers(
                                 "/api/evaluacion/evaluacion-filtro/**",
-                                "api/detalles-medicion/promedio-nivel-ph-piscina",
-                                "api/detalles-medicion/piscina-con-temperaturas-mas-altas"
+                                "/api/detalles-medicion/promedio-nivel-ph-piscina",
+                                "/api/detalles-medicion/piscina-con-temperaturas-mas-altas"
                         ).hasAnyRole("DEV", "ADMIN")
 
                         //Permisos DEV
