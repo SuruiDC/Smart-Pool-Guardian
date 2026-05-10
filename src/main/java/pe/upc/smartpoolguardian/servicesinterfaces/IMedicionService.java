@@ -2,9 +2,7 @@ package pe.upc.smartpoolguardian.servicesinterfaces;
 
 import pe.upc.smartpoolguardian.entities.Medicion;
 import java.util.Optional;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface IMedicionService {
 

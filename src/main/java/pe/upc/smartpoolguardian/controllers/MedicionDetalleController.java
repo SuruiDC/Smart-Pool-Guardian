@@ -10,8 +10,6 @@ import pe.upc.smartpoolguardian.entities.DetalleMedicion;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDetalleDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionDetalleService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
-
-import java.util.List;
 import java.util.Optional;
 
 @RestController
