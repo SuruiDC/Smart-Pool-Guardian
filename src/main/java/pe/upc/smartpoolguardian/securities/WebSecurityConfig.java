@@ -86,7 +86,7 @@ public class WebSecurityConfig {
                         //Permisos ADMIN
                         .requestMatchers(
                                 "/api/evaluacion/evaluacion-filtro/**"
-                        ).hasAnyRole("DEV", "ADMIN")
+                        ).hasAnyRole("ADMIN", "DEV")
 
                         //Permisos DEV
                         .requestMatchers(
