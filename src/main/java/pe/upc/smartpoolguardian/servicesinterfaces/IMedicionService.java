@@ -4,9 +4,7 @@ import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
 
 import java.util.Optional;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface IMedicionService {
 
@@ -14,4 +12,5 @@ public interface IMedicionService {
     public List<Medicion> listarMedicionesPorPiscina(int idPiscina);
     public Optional<Medicion> buscarMedicioPorId(int id);
     public List<PrediccionAlgasDTO> obtenerPrediccionesAlgas(Integer idUsuario);
+    public List<Object[]> ObtenerMedicionesDeUnTipoPorPiscina(Integer idPiscina, String tipo);
 }

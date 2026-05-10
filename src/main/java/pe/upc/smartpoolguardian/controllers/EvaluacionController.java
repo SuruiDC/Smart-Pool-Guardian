@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Evaluacion;
-import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.schema.dtos.EvaluacionPorFiltroDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IEvaluacionService;
-import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
-import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
 import java.time.LocalDate;
 import java.util.Optional;
