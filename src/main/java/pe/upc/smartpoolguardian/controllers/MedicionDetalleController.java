@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.DetalleMedicion;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDetalleDTO;
+import pe.upc.smartpoolguardian.schema.response.PhResponseDTO;
+import pe.upc.smartpoolguardian.schema.response.TemperaturaMasAltaResponseDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionDetalleService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +26,7 @@ public class MedicionDetalleController {
 
     @Autowired
     private IMedicionDetalleService mdS;
+
 
     ModelMapper m = new ModelMapper();
 
@@ -49,6 +53,38 @@ public class MedicionDetalleController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Detalle no encontrado");
         }
+    }
+
+    @GetMapping("/promedio-nivel-ph-piscina")
+    public ResponseEntity<?>promedioPhPorPiscina(){
+        List<Object[]> lista = mdS.promedioPhPiscina();
+        if(lista.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay mediciones existentes");
+        }
+        List<PhResponseDTO> response =new ArrayList<>();
+        for(Object[] fila : lista){
+            PhResponseDTO dto = new PhResponseDTO();
+            dto.setPiscina_id(((Number)fila[0]).intValue());
+            dto.setPromedioPh(((Double)fila[1]));
+            response.add(dto);
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/piscina-con-temperaturas-mas-altas")
+    public ResponseEntity<?>temperaturasMasAlta(){
+        List<Object[]> lista = mdS.temperaturaMasAltaPiscina();
+        if(lista.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay mediciones existentes");
+        }
+        List<TemperaturaMasAltaResponseDTO> response = new ArrayList<>();
+        for(Object[] fila : lista){
+            TemperaturaMasAltaResponseDTO dto = new TemperaturaMasAltaResponseDTO();
+            dto.setPiscina_id(((Number)fila[0]).intValue());
+            dto.setTemperaturaPiscina(((Double)fila[1]));
+            response.add(dto);
+        }
+        return ResponseEntity.ok(response);
     }
 
 }

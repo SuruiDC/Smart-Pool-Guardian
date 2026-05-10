@@ -1,0 +1,15 @@
+package pe.upc.smartpoolguardian.schema.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TemperaturaMasAltaResponseDTO {
+    private int piscina_id;
+    private double temperaturaPiscina;
+}
