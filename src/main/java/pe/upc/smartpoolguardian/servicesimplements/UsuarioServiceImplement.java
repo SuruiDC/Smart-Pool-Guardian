@@ -8,7 +8,6 @@ import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IUsuarioService;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
