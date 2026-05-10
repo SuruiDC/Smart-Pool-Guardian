@@ -47,10 +47,8 @@ public class RecomendacionServiceImplement implements IRecomendacionService {
     }
 
     @Override
-    public void eliminarRecomendacion(Integer id) {
-        Recomendacion existe = recomendacionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Recomendacion no encontrada con id: " + id));
-
-        recomendacionRepository.delete(existe);
+    public List<Object[]> ListarRecomendacionParaCritico() {
+        return recomendacionRepository.ListarRecomendacionParaCritico();
     }
+
 }

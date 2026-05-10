@@ -6,11 +6,11 @@ import pe.upc.smartpoolguardian.schema.dtos.UsuariosInactivosDTO;
 import java.util.List;
 
 public interface IUsuarioService {
-    public Usuario registrarUsuario(Usuario usuario);
+    public Usuario guardarUsuario(Usuario usuario);
     public List<Usuario> mostrarUsuarios();
     public Usuario editarUsuario(Usuario usuario);
+    public void eliminarUsuario(Usuario usuario);
     public Usuario buscarUsuarioPorId(int id);
-    // public void borrarUsuarioPorId(int id);
     public List<UsuariosInactivosDTO> obtenerInactivos(int dias);
 
 }

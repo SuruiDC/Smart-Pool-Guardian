@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Evaluacion;
 import pe.upc.smartpoolguardian.entities.Recomendacion;
 import pe.upc.smartpoolguardian.schema.request.RecomendacionRequestDTO;
+import pe.upc.smartpoolguardian.schema.response.MedPorTipoResponseDTO;
+import pe.upc.smartpoolguardian.schema.response.RecoCriticaResponseDTO;
 import pe.upc.smartpoolguardian.schema.response.RecomendacionResponseDTO;
 import pe.upc.smartpoolguardian.servicesimplements.EvaluacionServiceImplement;
 import pe.upc.smartpoolguardian.servicesimplements.RecomendacionServiceImplement;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,7 +61,8 @@ public class RecomendacionController {
     // ── READ BY EVALUACION ───────────────────────────────────────────────────
     @GetMapping("/por-evaluacion/{idEvaluacion}")
     public ResponseEntity<List<RecomendacionResponseDTO>> listarPorEvaluacion(
-            @PathVariable Integer idEvaluacion) {
+            @PathVariable Integer idEvaluacion
+    ) {
 
         List<RecomendacionResponseDTO> lista = recomendacionService.listarPorEvaluacion(idEvaluacion)
                 .stream()
@@ -72,32 +77,6 @@ public class RecomendacionController {
         Recomendacion recomendacion = recomendacionService.buscarRecomendacionPorId(id);
         return ResponseEntity.ok(toResponseDTO(recomendacion));
     }
-    // ── UPDATE ───────────────────────────────────────────────────────────────
-    @PutMapping("/{id}")
-    public ResponseEntity<RecomendacionResponseDTO> actualizarRecomendacion(
-            @PathVariable Integer id,
-            @RequestBody @Valid RecomendacionRequestDTO dto) {
-
-        // Verificar que la Evaluacion existe
-        Evaluacion evaluacion = evaluacionService.buscarEvaluacionPorId(dto.getEvaluacionId());
-
-        // DTO → Entity
-        Recomendacion actualizar = new Recomendacion();
-        actualizar.setRecomendacionId(id);
-        actualizar.setMensaje(dto.getMensaje());
-        actualizar.setEvaluacion(evaluacion);
-
-        // Actualizar
-        Recomendacion actualizada = recomendacionService.actualizarRecomendacion(actualizar);
-
-        return ResponseEntity.ok(toResponseDTO(actualizada));
-    }
-    // ── DELETE ───────────────────────────────────────────────────────────────
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarRecomendacion(@PathVariable Integer id) {
-        recomendacionService.eliminarRecomendacion(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
 
     // ── Helper: Entity → ResponseDTO ─────────────────────────────────────────
     private RecomendacionResponseDTO toResponseDTO(Recomendacion r) {
@@ -107,4 +86,29 @@ public class RecomendacionController {
         response.setEvaluacionId(r.getEvaluacion().getEvaluacionId());
         return response;
     }
+
+    //Query Franco
+
+    @GetMapping("/recomendaciones-por-evaluaciones-criticas/")
+    public ResponseEntity<?> RecomendacionesPorEvaluacioensCriticas() {
+
+        List<Object[]> lista = recomendacionService.ListarRecomendacionParaCritico();
+
+        if(lista.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay recomendaciones existentes");
+        }
+
+        List<RecoCriticaResponseDTO> response = new ArrayList<>();
+        for(Object[] fila : lista){
+            RecoCriticaResponseDTO dto = new RecoCriticaResponseDTO();
+            dto.setDescripcion(((String)fila[0]));
+            dto.setDiagnostico(((String)fila[1]));
+            dto.setEstadoGeneral(((String)fila[2]));
+            dto.setFechaCreacion(((LocalDate)fila[3]));
+            response.add(dto);
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
 }

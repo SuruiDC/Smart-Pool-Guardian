@@ -17,7 +17,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
     private IUsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario) {
+    public Usuario guardarUsuario(Usuario usuario) {
 
         return usuarioRepository.save(usuario);
     }
@@ -39,6 +39,15 @@ public class UsuarioServiceImplement implements IUsuarioService {
         existe.setNumeroCelular(usuario.getNumeroCelular());
         existe.setRol(usuario.getRol());
         return usuarioRepository.save(existe);
+    }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        Usuario existe = usuarioRepository.findById(usuario.getUsuarioId()).
+                orElseThrow(()->new RuntimeException("Usuario no encontrado") );
+
+        existe.setActivo(false);
+        usuarioRepository.save(existe);
     }
 
     @Override
@@ -69,17 +78,4 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return dtos;
     }
 
-    /*
-    @Override
-    public void borrarUsuarioPorId(int id) {
-        if (!usuarioRepository.existsById(id)) {
-            throw new RuntimeException("Usuario no encontrado");
-        }
-        else {
-            usuarioRepository.deleteById(id);
-        }
-
-
-    }
-    */
 }

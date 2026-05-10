@@ -16,5 +16,5 @@ public interface IRecomendacionService {
 
     public Recomendacion actualizarRecomendacion(Recomendacion recomendacion);
 
-    public void eliminarRecomendacion(Integer id);
+    List<Object[]> ListarRecomendacionParaCritico();
 }
