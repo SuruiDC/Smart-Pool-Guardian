@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.upc.smartpoolguardian.entities.Medicion;
 import pe.upc.smartpoolguardian.schema.dtos.MedicionDTO;
+import pe.upc.smartpoolguardian.schema.dtos.PrediccionAlgasDTO;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IPiscinaService;
 
@@ -64,5 +65,16 @@ public class MedicionController {
 
             return ResponseEntity.ok(mediciones);
         }
+    }
+
+    @GetMapping("/prediccion-algas/{idUsuario}")
+    public ResponseEntity<?> verRiesgoAlgas(@PathVariable("idUsuario") Integer idUsuario) {
+        List<PrediccionAlgasDTO> alertas = mS.obtenerPrediccionesAlgas(idUsuario);
+
+        if (alertas.isEmpty()) {
+            return new ResponseEntity<>("No se detectó riesgo de algas para las piscinas de este usuario. Los niveles están bajo control.", HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(alertas, HttpStatus.OK);
     }
 }
