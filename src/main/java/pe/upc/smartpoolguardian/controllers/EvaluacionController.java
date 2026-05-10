@@ -14,6 +14,7 @@ import pe.upc.smartpoolguardian.servicesinterfaces.IEvaluacionService;
 import pe.upc.smartpoolguardian.servicesinterfaces.IMedicionService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -51,15 +52,14 @@ public class EvaluacionController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Se creo correctamente la evaluacion");
     }
 
-    @GetMapping("/evaluacion-filtro/{estadoG}/{diagnostico}/{fecha}")
+    @GetMapping("/evaluacion-filtro/{estadoG}/{fecha}")
     public ResponseEntity<?>evaluacionFiltro(
             @PathVariable @Valid String estadoG,
-            String diagnostico,
             LocalDate fecha
     ){
 
-        Optional<Evaluacion> evaluacion = eS.filtrarEvaluacion(estadoG,diagnostico,fecha);
-        EvaluacionPorFiltroDTO dto = m.map(evaluacion.get(),EvaluacionPorFiltroDTO.class);
+        List<Evaluacion> evaluacion = eS.filtrarEvaluacion(estadoG,fecha);
+        List<EvaluacionPorFiltroDTO> dto = evaluacion.stream().map(x -> m.map(x, EvaluacionPorFiltroDTO.class)).toList();
         return ResponseEntity.ok(dto);
 
 

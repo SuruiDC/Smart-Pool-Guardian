@@ -10,5 +10,4 @@ import java.time.LocalDate;
 public class EvaluacionPorFiltroDTO {
     private String estadoGeneral;
     private LocalDate fechaCreacion;
-    private String diagnostico;
 }
