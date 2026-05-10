@@ -14,7 +14,7 @@ import java.util.List;
 
 @Repository
 public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
-    public Usuario findOneByUsername(String username);
+    public Usuario findOneByNombreUsuario(String username);
 
     //BUSCAR POR NOMBRE
     @Query("select count(u.nombreUsuario) from Usuario u where u.nombreUsuario =:username")

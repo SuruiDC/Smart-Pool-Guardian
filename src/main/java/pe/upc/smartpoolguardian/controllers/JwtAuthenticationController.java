@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pe.upc.smartpoolguardian.schema.request.JwtRequestDTO;
-import pe.upc.smartpoolguardian.schema.response.JwtResponseDTO;
+import pe.upc.smartpoolguardian.schema.response.JWTResponseDTO;
 import pe.upc.smartpoolguardian.securities.JwtTokenUtil;
 import pe.upc.smartpoolguardian.servicesimplements.JwtUserDetailsService;
 
@@ -28,11 +28,11 @@ public class JwtAuthenticationController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponseDTO> login(@RequestBody JwtRequestDTO req) throws Exception {
+    public ResponseEntity<?> login(@RequestBody JwtRequestDTO req) throws Exception {
         authenticate(req.getUsername(), req.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseDTO(token));
+        return ResponseEntity.ok(new JWTResponseDTO(token));
     }
 
     private void authenticate(String username, String password) throws Exception {

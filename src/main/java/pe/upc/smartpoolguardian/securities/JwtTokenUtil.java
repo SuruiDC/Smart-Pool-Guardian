@@ -14,28 +14,36 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtil{
 
 
-    private static final long TOKEN_VALIDITY = 5 * 60 * 60 * 1000; // 5 horas
+    private static final long TOKEN_VALIDITY = 2 * 60 * 60 * 1000; // 2 horas
 
-    @Value("${jwt.secret}")
+    @Value("66f6f3b202b1ce7b818f76f952973a4a9589a619cb63bee2b43c365b9276f6781e1a7ac1f5988bb5aca0f8452d855992e03d09c2a79186af7042752eb1e7aa06")
     private String secret;
 
+    //Decode al token para obtener el username
     public String getUsernameFromToken(String token) {
+
         return getClaim(token, Claims::getSubject);
+
     }
 
+    //Se obtiene la fecha de expiracion del token o mejor dicho la hora
     public Date getExpirationDate(String token) {
+
         return getClaim(token, Claims::getExpiration);
+
     }
 
-    public <T> T getClaim(
-            String token,
-            Function<Claims, T> resolver
-    ) {
+    //Permite traer algo en especifico, ejemplo: Queremos traer la contraseña sin necesidad
+    // de crear un metodo para descifrar solo la contraseña en el token
+    public <T> T getClaim(String token, Function<Claims, T> resolver) {
+
         return resolver.apply(getAllClaims(token));
+
     }
 
     private Claims getAllClaims(String token) {
@@ -46,11 +54,14 @@ public class JwtTokenUtil {
                 .getBody();
     }
 
+    //Validador de existencia del token
     private boolean isExpired(String token) {
-        return getExpirationDate(token)
-                .before(new Date());
+
+        return getExpirationDate(token).before(new Date());
+
     }
 
+    //Aquí se genera el token con los userDetails, es decir sus roles, si esta activo(eliminado) y nombre
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
@@ -69,35 +80,27 @@ public class JwtTokenUtil {
         );
     }
 
-    private String createToken(
-            Map<String, Object> claims,
-            String username
-    ) {
+    private String createToken(Map<String, Object> claims, String username) {
 
         Date now = new Date();
-        Date expiration =
-                new Date(now.getTime() + TOKEN_VALIDITY);
+        Date expiration = new Date(now.getTime() + TOKEN_VALIDITY);
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiration)
-                .signWith(
+        return Jwts.builder()//Se arma el token
+                .setClaims(claims)//Roles
+                .setSubject(username)//Usuario
+                .setIssuedAt(now)//Fecha de emision
+                .setExpiration(expiration)//Fecha de expiracion
+                .signWith(//Se firma el token es decir se codifica o se encripta como sea
                         new SecretKeySpec(
                                 Base64.getDecoder().decode(secret),
                                 SignatureAlgorithm.HS512.getJcaName()
                         )
                 )
-                .compact();
+                .compact();//Convierte todo en un string
     }
 
-    public boolean validateToken(
-            String token,
-            UserDetails userDetails
-    ) {
+    public boolean validateToken(String token, UserDetails userDetails) {
         return getUsernameFromToken(token)
-                .equals(userDetails.getUsername())
-                && !isExpired(token);
+                .equals(userDetails.getUsername()) && !isExpired(token);
     }
 }
