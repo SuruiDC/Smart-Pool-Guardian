@@ -33,16 +33,6 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public void eliminarRolPorId(int id) {
-        if (rolRepository.existsById(id)) {
-            rolRepository.deleteById(id);
-        }
-        else  {
-            throw new RuntimeException("Rol no encontrado");
-        }
-    }
-
-    @Override
     public Rol findByRolId(int rolId) {
         return rolRepository.findById(rolId)
                 .orElseThrow(()-> new RuntimeException("Rol no encontrado"));

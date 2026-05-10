@@ -41,7 +41,7 @@ public class UsuarioController {
         usuario.setRol(encontrarRol);
 
         //CREAR USUARIO
-        Usuario nuevoUsuario = usuarioService.registrarUsuario(usuario);
+        Usuario nuevoUsuario = usuarioService.guardarUsuario(usuario);
 
         // De Entity a DTOResponse
         UsuarioResponseDTO response = new UsuarioResponseDTO(
@@ -56,7 +56,7 @@ public class UsuarioController {
 
     @GetMapping
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios() {
-        List<Usuario> listaUsuarios = usuarioService.mostrarUsuarios();
+        List<Usuario> listaUsuarios = usuarioService.mostrarUsuarios().stream().filter(x -> x.getActivo() == true).toList();
         return ResponseEntity.ok(listaUsuarios);
     }
 
@@ -90,12 +90,14 @@ public class UsuarioController {
 
         return usuarioService.obtenerInactivos(dias);
     }
-    /*
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarUsuarioPorId (@PathVariable int id){
-        usuarioService.borrarUsuarioPorId(id);
-        return ResponseEntity.noContent().build();
-    }
 
- */
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarUsuarioPorId (@PathVariable int id){
+
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(id);
+        usuarioService.eliminarUsuario(usuario);
+
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
 }
