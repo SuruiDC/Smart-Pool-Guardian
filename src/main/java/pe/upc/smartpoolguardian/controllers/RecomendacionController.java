@@ -92,7 +92,7 @@ public class RecomendacionController {
 
         return ResponseEntity.ok(toResponseDTO(actualizada));
     }
-    // ── DELETE ───────────────────────────────────────────────────────────────
+    // ── DELETE ─────────────────────────────────────────────────────────────── corregir
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarRecomendacion(@PathVariable Integer id) {
         recomendacionService.eliminarRecomendacion(id);
