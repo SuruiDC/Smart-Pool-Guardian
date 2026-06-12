@@ -27,7 +27,7 @@ public class UsuarioController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @PostMapping
+    @PostMapping("/registrar")
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {
         //De DTORequest a Entity
         Usuario usuario = new Usuario();
@@ -36,7 +36,6 @@ public class UsuarioController {
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         usuario.setEmail(dto.getEmail());
         usuario.setNumeroCelular(dto.getNumeroCelular());
-
         Rol encontrarRol = rolService.findByRolId(dto.getRolId());
         usuario.setRol(encontrarRol);
 
