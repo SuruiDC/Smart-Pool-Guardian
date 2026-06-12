@@ -15,7 +15,7 @@ public interface IEvaluacionRepository extends JpaRepository<Evaluacion,Integer>
 
     @Query("SELECT e FROM Evaluacion e WHERE e.estadoGeneral = :estadoG AND e.fechaCreacion = :fecha" )
     List<Evaluacion> filtrarEvaluacion(
-            @Param("estadoG") String estadoG,
+            @Param("estadoG") String estadoG,       
             @Param("fecha")LocalDate fecha
             );
 }
