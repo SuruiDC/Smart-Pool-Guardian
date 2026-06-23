@@ -16,6 +16,7 @@ import pe.upc.smartpoolguardian.servicesimplements.UsuarioServiceImplement;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
