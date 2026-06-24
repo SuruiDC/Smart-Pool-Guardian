@@ -14,8 +14,7 @@ public class UsuarioRequestDTO {
     private String email;
     @NotBlank
     private String numeroCelular;
-    @NotBlank
-    private boolean activo;
+
 
     private int rolId;
 }

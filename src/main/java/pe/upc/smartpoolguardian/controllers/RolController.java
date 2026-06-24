@@ -13,7 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/roles")
-public class RolController {
+public class
+RolController {
     @Autowired
     private RolServiceImplement rolService;
 
