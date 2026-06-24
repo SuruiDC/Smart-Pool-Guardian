@@ -51,7 +51,7 @@ public class PiscinaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<PiscinasPorUsuarioDTO>> mostrarPiscinasporUsuario(
             @RequestParam int idUsuario
     ) {
