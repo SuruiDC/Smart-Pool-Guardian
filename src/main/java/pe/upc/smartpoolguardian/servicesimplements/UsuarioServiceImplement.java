@@ -78,4 +78,10 @@ public class UsuarioServiceImplement implements IUsuarioService {
         return dtos;
     }
 
+    @Override
+    public Usuario buscarPorNombre(String nombre){
+
+        return usuarioRepository.findOneByNombreUsuario(nombre);
+
+    }
 }

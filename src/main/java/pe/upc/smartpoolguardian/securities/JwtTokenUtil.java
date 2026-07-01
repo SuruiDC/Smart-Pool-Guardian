@@ -62,7 +62,7 @@ public class JwtTokenUtil{
     }
 
     //Aquí se genera el token con los userDetails, es decir sus roles, si esta activo(eliminado) y nombre
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, int userId) {
 
         Map<String, Object> claims = new HashMap<>();
 
@@ -73,6 +73,8 @@ public class JwtTokenUtil{
                         .map(auth -> auth.getAuthority())
                         .collect(Collectors.joining(","))
         );
+
+        claims.put("id", userId);
 
         return createToken(
                 claims,

@@ -12,5 +12,5 @@ public interface IUsuarioService {
     public void eliminarUsuario(Usuario usuario);
     public Usuario buscarUsuarioPorId(int id);
     public List<UsuariosInactivosDTO> obtenerInactivos(int dias);
-
+    public Usuario buscarPorNombre(String nombre);
 }

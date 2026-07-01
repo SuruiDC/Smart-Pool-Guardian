@@ -7,14 +7,17 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import pe.upc.smartpoolguardian.entities.Usuario;
 import pe.upc.smartpoolguardian.schema.request.JwtRequestDTO;
 import pe.upc.smartpoolguardian.schema.response.JWTResponseDTO;
 import pe.upc.smartpoolguardian.securities.JwtTokenUtil;
 import pe.upc.smartpoolguardian.servicesimplements.JwtUserDetailsService;
+import pe.upc.smartpoolguardian.servicesinterfaces.IUsuarioService;
 
 @RestController
 @CrossOrigin
@@ -25,13 +28,16 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private JwtUserDetailsService userDetailsService;
+    @Autowired
+    private IUsuarioService usuarioService;
 
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody JwtRequestDTO req) throws Exception {
         authenticate(req.getUsername(), req.getPassword());
+        Usuario user = usuarioService.buscarPorNombre(req.getUsername());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
-        final String token = jwtTokenUtil.generateToken(userDetails);
+        final String token = jwtTokenUtil.generateToken(userDetails, user.getUsuarioId());
         return ResponseEntity.ok(new JWTResponseDTO(token));
     }
 

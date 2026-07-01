@@ -77,15 +77,14 @@ public class WebSecurityConfig {
                                 "/login",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html",
-                                "/api/**"
+                                "/swagger-ui.html"
+                                //"/api/**"
                         ).permitAll()
 
                         //Registro de usuarios
-                        //.requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/usuarios/registrar").permitAll()
 
                         //Permisos ADMIN
-                        /*
                         .requestMatchers(
                                 "/api/evaluacion/evaluacion-filtro/**",
                                 "/api/detalles-medicion/promedio-nivel-ph-piscina",
@@ -101,7 +100,7 @@ public class WebSecurityConfig {
                                 "/api/roles",
                                 "/api/usuarios/eliminar"
                         ).hasAnyRole("DEV")
-                        */
+
                         .anyRequest().authenticated()//Aca indica que cualquier otro endpoint es por autenticacion
                 )
                 .httpBasic(Customizer.withDefaults())//Segun gpt esto no sirve xd
