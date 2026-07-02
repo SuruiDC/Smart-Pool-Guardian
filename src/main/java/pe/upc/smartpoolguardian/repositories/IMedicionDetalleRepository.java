@@ -2,9 +2,11 @@ package pe.upc.smartpoolguardian.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pe.upc.smartpoolguardian.entities.DetalleMedicion;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface IMedicionDetalleRepository extends JpaRepository<DetalleMedicion,Integer> {
@@ -29,4 +31,7 @@ public interface IMedicionDetalleRepository extends JpaRepository<DetalleMedicio
             " GROUP BY m.piscina_id\n" +
             "ORDER BY temperatura_promedio DESC;", nativeQuery = true)
     List<Object[]> temperaturaMasAltaPiscina();
+
+    @Query("SELECT d FROM DetalleMedicion d WHERE d.medicion.piscina.piscinaId = :piscinaId ORDER BY d.medicion.fechaMedicion DESC LIMIT 1")
+    Optional<DetalleMedicion> findUltimaByPiscinaId(@Param("piscinaId") Integer piscinaId);
 }

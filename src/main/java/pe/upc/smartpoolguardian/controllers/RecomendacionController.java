@@ -12,6 +12,7 @@ import pe.upc.smartpoolguardian.schema.response.MedPorTipoResponseDTO;
 import pe.upc.smartpoolguardian.schema.response.RecoCriticaResponseDTO;
 import pe.upc.smartpoolguardian.schema.response.RecomendacionResponseDTO;
 import pe.upc.smartpoolguardian.servicesimplements.EvaluacionServiceImplement;
+import pe.upc.smartpoolguardian.servicesimplements.GeminiServiceImplement;
 import pe.upc.smartpoolguardian.servicesimplements.RecomendacionServiceImplement;
 
 import java.time.LocalDate;
@@ -28,6 +29,9 @@ public class RecomendacionController {
 
     @Autowired
     private EvaluacionServiceImplement evaluacionService;
+
+    @Autowired
+    private GeminiServiceImplement geminiService;
 
     // ── CREATE ──────────────────────────────────────────────────────────────
     @PostMapping("/registrar")
@@ -109,6 +113,12 @@ public class RecomendacionController {
         }
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/piscina/{piscinaId}")
+    public ResponseEntity<String> getRecomendacion(@PathVariable Integer piscinaId) {
+        String recomendacion = geminiService.obtenerRecomendacion(piscinaId);
+        return ResponseEntity.ok(recomendacion);
     }
 
 }
