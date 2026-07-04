@@ -24,7 +24,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 @Configuration
 @EnableWebSecurity//Activa la seguridad web en la apliacion
 @EnableMethodSecurity//Activa anotaciones que comprueba por roles como @PreAuthorize("hasRole('ADMIN')"), @Secured("ROLE_ADMIN")
-public class WebSecurityConfig {
+public class    WebSecurityConfig {
 
     //Manejador de errores rechazo de autenticacion
     @Autowired
