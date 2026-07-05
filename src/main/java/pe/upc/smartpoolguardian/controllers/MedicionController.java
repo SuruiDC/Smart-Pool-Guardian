@@ -30,7 +30,7 @@ public class MedicionController {
 
     ModelMapper m = new ModelMapper();
 
-    @PostMapping("/registrar/")
+    @PostMapping("/registrar")
     public ResponseEntity<?> crearMedicion(@RequestBody @Valid MedicionDTO dto) {
         //ENCONTRAR PISCINA
         var piscinaOpt = pS.buscarPiscinaPorId(dto.getIdPiscina());
@@ -39,6 +39,7 @@ public class MedicionController {
         Medicion medicion = new Medicion();
         medicion.setFechaMedicion(dto.getFechaMedicion());
         medicion.setPiscina(piscinaOpt);
+        medicion.setMedicionId(null);
 
         //CREAR MEDICION
         Medicion registro = mS.crearMedicion(medicion);
@@ -47,6 +48,7 @@ public class MedicionController {
         MedicionDTO response = new MedicionDTO();
         response.setFechaMedicion(registro.getFechaMedicion());
         response.setIdPiscina(registro.getPiscina().getPiscinaId());
+        response.setMedicionId(registro.getMedicionId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

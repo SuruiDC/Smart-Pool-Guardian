@@ -30,12 +30,13 @@ public class MedicionDetalleController {
 
     ModelMapper m = new ModelMapper();
 
-    @PostMapping("/registrar/")
+    @PostMapping("/registrar")
     public ResponseEntity<?> crearMedicionDetalle(@RequestBody @Valid MedicionDetalleDTO dto) {
 
         if (mS.buscarMedicioPorId(dto.getMedicionId()).isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay una medicion creada con esa id.");
 
         DetalleMedicion detalle = m.map(dto, DetalleMedicion.class);
+        detalle.setDetalleMedicionId(null);
         DetalleMedicion registro = mdS.crearDetalle(detalle);
         MedicionDetalleDTO response = m.map(registro, MedicionDetalleDTO.class);
 
