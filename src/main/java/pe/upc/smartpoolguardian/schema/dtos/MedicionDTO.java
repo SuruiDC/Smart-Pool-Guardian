@@ -8,6 +8,9 @@ import java.time.LocalDate;
 public class MedicionDTO {
 
     @NotNull
+    private int medicionId;
+
+    @NotNull
     private LocalDate fechaMedicion;
 
     @NotNull
