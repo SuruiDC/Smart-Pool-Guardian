@@ -91,8 +91,7 @@ public class    WebSecurityConfig {
                                 "/api/detalles-medicion/piscina-con-temperaturas-mas-altas",
                                 "/api/mediciones/obtener-tipo-mediciones-por-piscina",
                                 "/api/mediciones/prediccion-algas/**",
-                                "/api/recomendaciones/recomendaciones-por-evaluaciones-criticas/",
-                                "/api/usuarios/reporte-usuarios-inactivos"
+                                "/api/recomendaciones/recomendaciones-por-evaluaciones-criticas/"
                         ).hasAnyRole("DEV", "ADMIN")
 
                         //Permisos DEV
