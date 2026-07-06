@@ -54,7 +54,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     public ResponseEntity<List<Usuario>> mostrarTodosLosUsuarios() {
         List<Usuario> listaUsuarios = usuarioService.mostrarUsuarios().stream().filter(x -> x.getActivo() == true).toList();
         return ResponseEntity.ok(listaUsuarios);
