@@ -1,6 +1,7 @@
 package pe.upc.smartpoolguardian.controllers;
 
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,12 @@ RolController {
     @Autowired
     private RolServiceImplement rolService;
 
-    @PostMapping
+    private ModelMapper m = new ModelMapper();
+
+    @PostMapping("/registrar")
     public ResponseEntity<Rol> crearRol(@RequestBody @Valid RolRequestDTO dto) {
         Rol nuevo = new Rol();
+        nuevo.setRolId(null);
         nuevo.setTipoRol(dto.getTipoRol());
 
         Rol creado = rolService.crearRol(nuevo);
@@ -28,9 +32,10 @@ RolController {
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Rol>> listarRoles() {
-        return ResponseEntity.ok(rolService.mostrarRoles());
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarRoles() {
+        List<RolRequestDTO> response = rolService.mostrarRoles().stream().map(x -> m.map(x, RolRequestDTO.class)).toList();
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")

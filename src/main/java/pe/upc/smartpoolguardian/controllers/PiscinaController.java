@@ -34,6 +34,7 @@ public class PiscinaController {
 
         //DTO a Entity
         Piscina crear = new Piscina();
+        crear.setPiscinaId(null);
         crear.setNombrePiscina(dto.getNombrePiscina());
         crear.setVolumen(dto.getVolumen());
         crear.setUsuario(usuario);

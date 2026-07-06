@@ -32,6 +32,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO dto) {
         //De DTORequest a Entity
         Usuario usuario = new Usuario();
+        usuario.setUsuarioId(null);
         usuario.setNombreUsuario(dto.getNombreUsuario());
         usuario.setActivo(true);
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
